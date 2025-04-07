@@ -1,4 +1,6 @@
 import 'package:cloyhapp/cubit/cubit_cubit.dart';
+import 'package:cloyhapp/cubit/cubit_state.dart';
+import 'package:cloyhapp/cubit/forgotpassword_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
@@ -20,10 +22,18 @@ class MyApp extends StatelessWidget {
     final dio = Dio();
     final apiService = LoginApi(dio);
     final repo = MyRepo(apiService);
+    final repos = ForgotPasswordRepository(apiClient: apiService);
 
-    return BlocProvider(
-      create: (_) => SignupCubit(repo),
-      child: MaterialApp(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ForgotPasswordCubit>(
+        create: (_) => ForgotPasswordCubit( repository: repos)),
+
+    BlocProvider<SignupCubit>(
+    create: (_) => SignupCubit(repo),
+        ),
+      ],
+    child: MaterialApp(
         theme: ThemeData.light(),
         debugShowCheckedModeBanner: false,
         onGenerateRoute: appRouter.generateRoute,

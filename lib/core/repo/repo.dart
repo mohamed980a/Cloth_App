@@ -2,6 +2,7 @@ import 'package:cloyhapp/core/Network/api_service.dart';
 // import 'package:dio/dio.dart';
 // import 'package:retrofit/retrofit.dart';
 
+import '../../features/Auth/data/model/forgotpassword.dart';
 import '../../features/Auth/data/model/signup.dart';
 import 'package:cloyhapp/features/Auth/data/model/sub_categories.dart';
 
@@ -19,6 +20,26 @@ class MyRepo {
     return await loginApi.signUp(request);
   }
 }
+
+
+
+class ForgotPasswordRepository {
+  final LoginApi apiClient;
+
+  ForgotPasswordRepository({required this.apiClient});
+
+  Future<String> forgotPassword(String email) async {
+    try {
+      final response = await apiClient.forgotPassword(ForgotPasswordRequest(email: email));
+      return response.message;
+    } catch (e) {
+      throw Exception('Failed to send reset link');
+    }
+  }
+}
+
+
+
 // ////////////////////////////////////////  sub_categories.dart
 
 class SubCategoriesRepository {

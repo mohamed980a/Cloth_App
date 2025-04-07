@@ -15,16 +15,18 @@ class ForgetBody extends StatelessWidget {
       body: BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
         listener: (context, state) {
           if (state.successMessage != null) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(state.successMessage!)));
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.successMessage!)),
+            );
           }
           if (state.errorMessage != null) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(state.errorMessage!)));
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.errorMessage!)),
+            );
           }
         },
         builder: (context, state) {
-          return Padding(
+          return  Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -70,6 +72,7 @@ class ForgetBody extends StatelessWidget {
                       final email = emailController.text;
                       if (email.isNotEmpty) {
                         context.read<ForgotPasswordCubit>().forgotPassword(email);
+
                       }
                     },
                     child: Text('Send Reset Link'),
