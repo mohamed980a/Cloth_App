@@ -21,8 +21,6 @@ class MyRepo {
   }
 }
 
-
-
 class ForgotPasswordRepository {
   final LoginApi apiClient;
 
@@ -30,15 +28,14 @@ class ForgotPasswordRepository {
 
   Future<String> forgotPassword(String email) async {
     try {
-      final response = await apiClient.forgotPassword(ForgotPasswordRequest(email: email));
+      final response =
+          await apiClient.forgotPassword(ForgotPasswordRequest(email: email));
       return response.message;
     } catch (e) {
       throw Exception('Failed to send reset link');
     }
   }
 }
-
-
 
 // ////////////////////////////////////////  sub_categories.dart
 

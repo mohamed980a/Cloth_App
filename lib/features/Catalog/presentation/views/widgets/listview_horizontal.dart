@@ -10,7 +10,7 @@ class ListviewHorizontal extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return ListviewHorizontalItem();
+          return SubCategoriesList();
         },
         itemCount: 4,
       ),
