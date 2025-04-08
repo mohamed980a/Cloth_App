@@ -100,7 +100,7 @@ class SignupCubit extends Cubit<SignupState> {
         ),
       );
 
-      emit(SignupSuccess(mockResponse));
+      emit(SignupSuccess(mockResponse,""));
     } catch (e) {
       emit(SignupFailure('حصل خطأ أثناء التسجيل: $e'));
     }

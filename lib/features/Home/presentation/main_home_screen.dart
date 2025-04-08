@@ -1,3 +1,4 @@
+import 'package:cloyhapp/features/Catalog/presentation/views/catalog_screen.dart';
 import 'package:cloyhapp/features/Catalog/presentation/views/widgets/catalog_body.dart';
 import 'package:cloyhapp/features/Category/presentation/views/category_screen.dart';
 import 'package:cloyhapp/features/Favorite/presentation/views/Fav_screen.dart';
@@ -20,7 +21,8 @@ GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
 List<Widget> screen = [
   HomeScreen(),
-  CategoryScreen(),
+  // CategoryScreen(),
+  CatalogScreen(),
   CheckOut(),
   FavScreen(),
   MyprofileScreen(),

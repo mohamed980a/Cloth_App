@@ -17,3 +17,35 @@
 // Future<ForgotPasswordResponse> forgotPassword(@Body() ForgotPasswordRequest request);
 // @POST('/user/reset-password')
 // Future<ResetPasswordResponse> resetPassword(@Body() ResetPasswordRequest request);
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../cubit/auth_cubit.dart';
+import '../../cubit/auth_state.dart';
+
+class DioClient {
+  final Dio dio = Dio();
+
+  DioClient(BuildContext context) {
+    dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) {
+          final authCubit = context.read<AuthCubit>();
+          final authState = authCubit.state;
+
+          if (authState is AuthAuthenticated) {
+            options.headers['Authorization'] = 'Bearer ${authState.token}';
+          }
+
+          return handler.next(options);
+        },
+      ),
+    );
+  }
+
+  Future<Response> getProtectedData() async {
+    final response = await dio.get("https://api.tryon-store.xyz/api/v1//users/login");
+    return response;
+  }
+}

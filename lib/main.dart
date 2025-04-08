@@ -10,6 +10,8 @@ import 'package:cloyhapp/core/app_router.dart';
 import 'package:cloyhapp/core/Network/api_service.dart';
 import 'package:cloyhapp/core/repo/repo.dart';
 
+import 'cubit/auth_cubit.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -28,6 +30,8 @@ class MyApp extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+        create: (_) => AuthCubit()),
         BlocProvider<ForgotPasswordCubit>(
           create: (_) => ForgotPasswordCubit(repository: repos),
         ),

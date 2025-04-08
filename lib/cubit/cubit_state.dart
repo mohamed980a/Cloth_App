@@ -54,8 +54,9 @@ class SignupLoading extends SignupState {}
 
 class SignupSuccess extends SignupState {
   final Signup signup;
+  final String token;
 
-  SignupSuccess(this.signup);
+  SignupSuccess(this.signup, this.token);
 }
 
 class SignupFailure extends SignupState {
