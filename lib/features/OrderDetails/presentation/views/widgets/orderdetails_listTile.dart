@@ -1,5 +1,4 @@
 import 'package:cloyhapp/core/Assets/assets_images.dart';
-import 'package:flutter/cupertino.dart';
 
 class orderdetails_listTile {
   final String title;
@@ -16,7 +15,7 @@ List<orderdetails_listTile> Orderdetails_listTile = [
   orderdetails_listTile(
       title: "Payment method:",
       subtitle: "**** **** **** 3947",
-      image: "${AppAssets.card}"),
+      image: AppAssets.card),
   orderdetails_listTile(
       title: "Delivery method:", subtitle: "FedEx, 3 days, 15"),
   orderdetails_listTile(

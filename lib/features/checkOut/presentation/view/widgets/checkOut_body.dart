@@ -1,8 +1,5 @@
-import 'package:cloyhapp/core/Assets/assets_images.dart';
 import 'package:cloyhapp/features/checkOut/presentation/view/widgets/listView.dart';
 import 'package:cloyhapp/features/checkOut/presentation/view/widgets/row_total_amount.dart';
-import 'package:cloyhapp/features/checkOut/presentation/view/widgets/textField_PromoCode.dart';
-import 'package:cloyhapp/features/checkOut/presentation/view/widgets/total_amount_details.dart';
 import 'package:flutter/material.dart';
 
 class CheckOutBody extends StatelessWidget {

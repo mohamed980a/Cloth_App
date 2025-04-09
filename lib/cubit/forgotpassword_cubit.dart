@@ -35,13 +35,15 @@ class ForgotPasswordState {
   final String? successMessage;
   final String? errorMessage;
 
-  ForgotPasswordState({this.isLoading = false, this.successMessage, this.errorMessage});
+  ForgotPasswordState(
+      {this.isLoading = false, this.successMessage, this.errorMessage});
 }
 
 class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   final ForgotPasswordRepository repository;
 
-  ForgotPasswordCubit({required this.repository}) : super(ForgotPasswordState());
+  ForgotPasswordCubit({required this.repository})
+      : super(ForgotPasswordState());
 
   Future<void> forgotPassword(String email) async {
     emit(ForgotPasswordState(isLoading: true));
@@ -54,4 +56,3 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     }
   }
 }
-

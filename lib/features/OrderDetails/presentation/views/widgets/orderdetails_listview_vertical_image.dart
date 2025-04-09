@@ -14,6 +14,5 @@ class OrderdetailsListviewVerticalImage extends StatelessWidget {
               image: AssetImage(AppAssets.Blueshirt), fit: BoxFit.fill),
           borderRadius: BorderRadius.circular(8)),
     );
-    ;
   }
 }

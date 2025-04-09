@@ -5,6 +5,8 @@ import 'package:cloyhapp/cubit/cubit_state.dart';
 import 'package:cloyhapp/features/Auth/presentation/views/Widgets/social_account_items.dart';
 
 class RegisterBody extends StatefulWidget {
+  const RegisterBody({super.key});
+
   @override
   State<RegisterBody> createState() => _RegisterBodyState();
 }

@@ -54,7 +54,6 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:cloyhapp/core/repo/repo.dart';
-import 'package:meta/meta.dart';
 import '../features/Auth/data/model/signup.dart';
 import 'cubit_state.dart';
 
@@ -100,7 +99,7 @@ class SignupCubit extends Cubit<SignupState> {
         ),
       );
 
-      emit(SignupSuccess(mockResponse,""));
+      emit(SignupSuccess(mockResponse));
     } catch (e) {
       emit(SignupFailure('حصل خطأ أثناء التسجيل: $e'));
     }

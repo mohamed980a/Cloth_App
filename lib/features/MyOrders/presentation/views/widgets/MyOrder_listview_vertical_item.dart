@@ -102,16 +102,16 @@ class MyorderListviewVerticalItem extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      side: BorderSide(color: Colors.black, width: 1),
+                    ),
                     child: Text(
                       "Details",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
                           color: Colors.black),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      side: BorderSide(color: Colors.black, width: 1),
                     ),
                   ),
                   SizedBox(

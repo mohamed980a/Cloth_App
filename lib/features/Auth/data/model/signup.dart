@@ -39,6 +39,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 part 'signup.g.dart';
+
 @JsonSerializable()
 class Signup {
   String? status;
@@ -49,8 +50,8 @@ class Signup {
   factory Signup.fromJson(Map<String, dynamic> json) => _$SignupFromJson(json);
 
   Map<String, dynamic> toJson() => _$SignupToJson(this);
-
 }
+
 @JsonSerializable()
 class Data {
   User? user;
@@ -61,6 +62,7 @@ class Data {
 
   Map<String, dynamic> toJson() => _$DataToJson(this);
 }
+
 @JsonSerializable()
 class User {
   String? name;
@@ -78,17 +80,18 @@ class User {
 
   User(
       {this.name,
-        this.email,
-        this.wishlist,
-        this.role,
-        this.photo,
-        this.active,
-        this.sId,
-        this.addresses,
-        this.createdAt,
-        this.updatedAt,
-        this.iV, this.password });
-        factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+      this.email,
+      this.wishlist,
+      this.role,
+      this.photo,
+      this.active,
+      this.sId,
+      this.addresses,
+      this.createdAt,
+      this.updatedAt,
+      this.iV,
+      this.password});
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
-        Map<String, dynamic> toJson() => _$UserToJson(this);
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 }

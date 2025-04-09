@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ChooseCard extends StatefulWidget {
-  ChooseCard({super.key});
+  const ChooseCard({super.key});
 
   @override
   State<ChooseCard> createState() => _ChooseCardState();

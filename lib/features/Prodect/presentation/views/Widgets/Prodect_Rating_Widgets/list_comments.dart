@@ -1,6 +1,5 @@
 import 'package:cloyhapp/core/Assets/assets_images.dart';
 import 'package:cloyhapp/features/Prodect/presentation/views/Widgets/Prodect_Rating_Widgets/list_comments_details.dart';
-import 'package:cloyhapp/features/Prodect/presentation/views/Widgets/Prodect_Rating_Widgets/list_image_comments.dart';
 import 'package:flutter/material.dart';
 
 class ListComments extends StatelessWidget {

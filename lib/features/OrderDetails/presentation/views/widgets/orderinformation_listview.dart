@@ -10,7 +10,7 @@ class OrderinformationListview extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Container(
+      child: SizedBox(
         width: 348,
         height: 240,
         child: Card(
@@ -41,16 +41,16 @@ class OrderinformationListview extends StatelessWidget {
                       height: 35,
                       child: ElevatedButton(
                         onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          side: BorderSide(color: Colors.black, width: 1),
+                        ),
                         child: Text(
                           "Reorder",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
                               color: Colors.black),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          side: BorderSide(color: Colors.black, width: 1),
                         ),
                       ),
                     ),
@@ -62,15 +62,15 @@ class OrderinformationListview extends StatelessWidget {
                       height: 35,
                       child: ElevatedButton(
                         onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.purple[900],
+                        ),
                         child: Text(
                           "Leave feedback",
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 14,
                               color: Colors.white),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.purple[900],
                         ),
                       ),
                     ),

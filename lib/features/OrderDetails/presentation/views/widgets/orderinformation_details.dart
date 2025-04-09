@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class OrderinformationDetails extends StatelessWidget {
-  OrderinformationDetails(
+  const OrderinformationDetails(
       {super.key, required this.title, required this.subtitle, this.image});
   final String title;
   final String subtitle;
@@ -15,7 +15,7 @@ class OrderinformationDetails extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "$title",
+              title,
               style: TextStyle(
                   fontSize: 11,
                   color: Color(0xff9B9B9B),
@@ -29,7 +29,7 @@ class OrderinformationDetails extends StatelessWidget {
               width: 10,
             ),
             Text(
-              "$subtitle",
+              subtitle,
               style: TextStyle(
                   fontSize: 11,
                   color: Colors.black,

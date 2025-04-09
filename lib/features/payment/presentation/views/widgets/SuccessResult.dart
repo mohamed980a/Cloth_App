@@ -13,7 +13,7 @@ class SuccessResult extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
+              SizedBox(
                 width: 150,
                 height: 200,
                 child: Image(

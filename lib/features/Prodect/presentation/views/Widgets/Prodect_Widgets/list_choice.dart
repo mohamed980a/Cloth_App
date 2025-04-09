@@ -41,6 +41,5 @@ class _ListChoiceState extends State<ListChoice> {
         ],
       ),
     );
-    ;
   }
 }

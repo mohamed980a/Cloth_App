@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../core/Utils/Widgets/btn_main.dart';
 import '../../../../../../cubit/forgotpassword_cubit.dart';
 
 class ForgetBody extends StatelessWidget {
@@ -26,7 +25,7 @@ class ForgetBody extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          return  Padding(
+          return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -36,15 +35,15 @@ class ForgetBody extends StatelessWidget {
                   "Forget password",
                   style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                 )),
-                Container(
+                SizedBox(
                   height: 150,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
                         "Please, enter your email address. You will receive a link to create a new password via email.",
-                        style:
-                            TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w600),
                       ),
                       TextField(
                         controller: emailController,
@@ -71,8 +70,9 @@ class ForgetBody extends StatelessWidget {
                     onPressed: () {
                       final email = emailController.text;
                       if (email.isNotEmpty) {
-                        context.read<ForgotPasswordCubit>().forgotPassword(email);
-
+                        context
+                            .read<ForgotPasswordCubit>()
+                            .forgotPassword(email);
                       }
                     },
                     child: Text('Send Reset Link'),

@@ -1,4 +1,3 @@
-import 'package:cloyhapp/core/Utils/color.dart';
 
 import 'package:cloyhapp/features/checkOut/presentation/view/widgets/total_amount_details.dart';
 import 'package:flutter/material.dart';

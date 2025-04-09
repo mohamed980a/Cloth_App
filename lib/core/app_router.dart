@@ -51,5 +51,6 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => CatalogScreen());
       // case 'detailsScreen':return MaterialPageRoute(builder: (_)=>DetailsScreen());
     }
+    return null;
   }
 }

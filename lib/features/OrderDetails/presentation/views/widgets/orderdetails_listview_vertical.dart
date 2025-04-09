@@ -15,6 +15,5 @@ class OrderdetailsListviewVertical extends StatelessWidget {
       },
       itemCount: 6,
     );
-    ;
   }
 }

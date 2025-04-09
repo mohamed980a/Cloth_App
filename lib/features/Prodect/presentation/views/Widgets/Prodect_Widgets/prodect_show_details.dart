@@ -1,7 +1,6 @@
 import 'package:cloyhapp/core/Utils/color.dart';
 import 'package:cloyhapp/features/Home/presentation/veiws/widget/listView.builder_New.dart';
 import 'package:cloyhapp/features/Prodect/presentation/views/Widgets/Prodect_Widgets/list_choice.dart';
-import 'package:cloyhapp/features/Prodect/presentation/views/Widgets/Prodect_Widgets/text_bottom_display.dart';
 import 'package:flutter/material.dart';
 
 class ProdectShowDetails extends StatelessWidget {

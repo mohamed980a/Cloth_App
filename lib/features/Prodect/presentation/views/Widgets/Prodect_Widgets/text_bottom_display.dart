@@ -1,6 +1,4 @@
-import 'package:cloyhapp/features/Home/presentation/veiws/home_screen_body.dart';
 import 'package:cloyhapp/features/Prodect/presentation/views/Widgets/Prodect_Card_Widgets/size_bottom_model.dart';
-import 'package:cloyhapp/features/Prodect/presentation/views/prodect_card_screen.dart';
 import 'package:flutter/material.dart';
 
 class TextBottomDisplay extends StatelessWidget {

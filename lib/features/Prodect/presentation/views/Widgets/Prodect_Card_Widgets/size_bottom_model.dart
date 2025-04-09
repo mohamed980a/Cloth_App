@@ -1,6 +1,3 @@
-import 'package:cloyhapp/features/Prodect/presentation/views/Widgets/Prodect_Card_Widgets/size_show_model_item.dart';
-import 'package:cloyhapp/features/Prodect/presentation/views/Widgets/prodect_body.dart';
-import 'package:cloyhapp/features/Prodect/presentation/views/Widgets/Prodect_Widgets/prodect_body_details.dart';
 import 'package:flutter/material.dart';
 
 import 'grid_view_item.dart';

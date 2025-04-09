@@ -4,7 +4,7 @@ import '../../../../../core/Assets/assets_images.dart';
 import '../home_screen_body.dart';
 
 class BottomNavigation extends StatelessWidget {
-  BottomNavigation({super.key, this.onTap});
+  const BottomNavigation({super.key, this.onTap});
   final void Function(int)? onTap;
 
   @override

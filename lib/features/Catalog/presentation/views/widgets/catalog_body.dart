@@ -4,7 +4,6 @@ import 'package:cloyhapp/features/Catalog/presentation/views/widgets/listview_ho
 import 'package:cloyhapp/features/Catalog/presentation/views/widgets/listview_vertical.dart';
 import 'package:flutter/material.dart';
 import 'custom_AppBar.dart';
-import 'listview_horizontal_item.dart';
 
 class CatalogBody extends StatefulWidget {
   const CatalogBody({super.key});
@@ -33,7 +32,7 @@ class _CatalogBodyState extends State<CatalogBody> {
                 ),
               ),
               SizedBox(height: 12),
-              SubCategoriesList(),
+              ListviewHorizontal(),
               SizedBox(height: 18),
               IconsHorizontal(
                 isGrid: isGrid,

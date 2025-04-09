@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SocialButton extends StatelessWidget {
   final String asset;
-  SocialButton({required this.asset});
+  const SocialButton({super.key, required this.asset});
 
   @override
   Widget build(BuildContext context) {

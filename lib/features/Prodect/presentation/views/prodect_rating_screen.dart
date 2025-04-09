@@ -1,5 +1,3 @@
-import 'package:cloyhapp/core/Utils/Widgets/btn_main.dart';
-import 'package:cloyhapp/core/Utils/color.dart';
 import 'package:cloyhapp/features/Prodect/presentation/views/Widgets/prodect_rating_body.dart';
 import 'package:flutter/material.dart';
 
