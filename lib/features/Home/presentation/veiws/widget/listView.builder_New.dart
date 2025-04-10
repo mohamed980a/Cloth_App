@@ -63,29 +63,33 @@ class ListViewNewHorizontal extends StatelessWidget {
                       const SizedBox(height: 3),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              product.colors?.join(', ') ?? '',
-                              style: const TextStyle(
-                                  fontSize: 11, color: Colors.grey),
-                            ),
-                            Text(
-                              product.name ?? '',
-                              style: const TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(height: 3),
-                            Text(
-                              "${product.price?.toStringAsFixed(2) ?? ''} EGP",
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
+                        child: Container(
+                          width: 160,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Text(
+                              //   product.colors?.join(', ') ?? '',
+                              //   style: const TextStyle(
+                              //       fontSize: 11, color: Colors.grey),
+                              // ),
+                              Text(
+                                product.name ?? '',
+                                style: const TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                    fontSize: 16, fontWeight: FontWeight.bold),
                               ),
-                            ),
-                          ],
+                              const SizedBox(height: 3),
+                              Text(
+                                "${product.price?.toStringAsFixed(2) ?? ''} EGP",
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
