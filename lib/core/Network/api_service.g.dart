@@ -241,10 +241,10 @@ class _LoginApi implements LoginApi {
   }
 
   @override
-  Future<List<Products>> getNewProducts({
-    int limit = 10,
-    int page = 1,
-  }) async {
+  Future<NewProduct> getNewProducts(
+    int limit,
+    int page,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'limit': limit,
@@ -252,7 +252,7 @@ class _LoginApi implements LoginApi {
     };
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<Products>>(Options(
+    final _options = _setStreamType<NewProduct>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -268,12 +268,10 @@ class _LoginApi implements LoginApi {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<Products> _value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late NewProduct _value;
     try {
-      _value = _result.data!
-          .map((dynamic i) => Products.fromJson(i as Map<String, dynamic>))
-          .toList();
+      _value = NewProduct.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

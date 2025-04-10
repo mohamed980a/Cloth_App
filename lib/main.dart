@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
     final repos = ForgotPasswordRepository(apiClient: apiService);
     final subCategoriesRepo = SubCategoriesRepository(api: apiService);
     final allCategoriesRepo = AllCategoriesRepository(api: apiService);
-    final reposs = ProductNewRepository(apiClient: apiService);
+    final newProductRepo = ProductCubit(apiService: apiService);
 
     return MultiBlocProvider(
       providers: [
@@ -46,10 +46,13 @@ class MyApp extends StatelessWidget {
           create: (_) =>
               AllCategoriesCubit(allCategoriesRepo)..getAllCategories(),
         ),
-        BlocProvider<ProductNewCubit>(
-          create: (_) =>
-          ProductNewCubit(productRepository: reposs)..fetchNewProducts(5, 1),
+        BlocProvider<ProductCubit>(
+          create: (_) => newProductRepo,
         ),
+        BlocProvider(
+          create: (_) => ProductCubit(apiService: apiService)..fetchNewProducts( 10,  1),
+
+        )
       ],
       child: MaterialApp(
         theme: ThemeData.light(),

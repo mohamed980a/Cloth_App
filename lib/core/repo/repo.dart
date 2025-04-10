@@ -64,15 +64,13 @@ class AllCategoriesRepository {
 
 //////////////////// all_Products_on_category.dart
 
-
 class ProductRepository {
   final LoginApi apiService;
 
   ProductRepository(this.apiService);
 
-  Future<List<Products>> getProducts(
-      String categoryId, String keyword, int limit, String subcategoryIds
-      ) async {
+  Future<List<Products>> getProducts(String categoryId, String keyword,
+      int limit, String subcategoryIds) async {
     try {
       final products = await apiService.getProducts(
         categoryId,
@@ -103,14 +101,15 @@ class ProductRepository {
 //   }
 // }
 class ProductNewRepository {
-  final LoginApi apiClient;
+  final LoginApi amira;
 
-  ProductNewRepository({required this.apiClient});
+  ProductNewRepository({required this.amira});
 
-  Future<List<Products>> getNewProducts(int limit, int page) async {
+  Future<NewProduct> getNewProducts(limit, int page) async {
     try {
-      final products = await apiClient.getNewProducts(limit: limit, page: page);
-      return products ;
+      final product = await amira.getNewProducts(limit, page);
+
+      return product;
     } catch (e) {
       rethrow;
     }

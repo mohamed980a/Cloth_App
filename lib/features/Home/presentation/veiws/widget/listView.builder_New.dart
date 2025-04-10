@@ -1,103 +1,104 @@
 import 'package:cloyhapp/cubit/get_new_products_cubit.dart';
-import 'package:cloyhapp/features/Home/presentation/veiws/widget/listView_New_items.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../cubit/get_all_products_on_category_cubit.dart';
-
 class ListViewNewHorizontal extends StatelessWidget {
+  final int limit = 10;
+  final int page = 1;
+
   const ListViewNewHorizontal({super.key});
-// dteam308@gmail.com
-  // 100200***aA
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductNewCubit, ProductNewState>(
+    return BlocBuilder<ProductCubit, ProductState>(
       builder: (context, state) {
-        if (state is ProductNewLoading) {
-          return Center(child: CircularProgressIndicator());
-        } else if (state is ProductNewLoaded) {
-          return ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: state.products.length,
-            itemBuilder: (context, index) {
-              final product = state.products[index];
-              return Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 184,
-                      width: 144,
-                      decoration: BoxDecoration(
-                        color: Colors.red,
-                        image: DecorationImage(
-                          image: AssetImage("${product.data!.imgCover}"),
-                          fit: BoxFit.fill,
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                    ),
-                    SizedBox(height: 3),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Icon(Icons.star_border, color: Colors.grey, size: 20),
-                        Icon(Icons.star_border, color: Colors.grey, size: 20),
-                        Icon(Icons.star_border, color: Colors.grey, size: 20),
-                        Icon(Icons.star_border, color: Colors.grey, size: 20),
-                        Icon(Icons.star_border, color: Colors.grey, size: 20),
-                        Text(
-                          '"${product.data!.ratingsQuantity}"',
-                          style: TextStyle(color: Colors.grey),
-                        )
-                      ],
-                    ),
-                    ////////////////////////////////////////////////////////////
+        if (state is ProductLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is ProductLoaded) {
+          final products = state.newProduct.data?.products;
 
-                    /////////////////////////////////////////////////////////////
-                    SizedBox(height: 3),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 3,
+          if (products == null || products.isEmpty) {
+            return const Center(child: Text("لا توجد منتجات حالياً"));
+          }
+
+          return SizedBox(
+            height: 300,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                final product = products[index];
+
+                return Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 184,
+                        width: 144,
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          image: DecorationImage(
+                            image: NetworkImage(product.imgCover ?? ""),
+                            fit: BoxFit.fill,
                           ),
-                          Text(
-                            // 'Mango Boy',
-                            "${product.data!.colors}",
-                            style: TextStyle(fontSize: 11, color: Colors.grey),
-                          ),
-                          // دي يا اميره
-                          Text(
-                            "${product.data!.name}",
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                          /////////////////////////////////////////////////////
-                          SizedBox(height: 3),
-                          Text(
-                            "${product.data!.price}",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
+                        ),
+                      ),
+                      const SizedBox(height: 3),
+                      Row(
+                        children: List.generate(
+                          5,
+                          (i) => const Icon(Icons.star_border,
+                              color: Colors.grey, size: 20),
+                        )..add(
+                            Text(
+                              "${product.ratingsAverage ?? 0}",
+                              style: const TextStyle(color: Colors.grey),
                             ),
                           ),
-                        ],
                       ),
-                    ),
-                  ],
-                ),
-              );
-            },
+                      const SizedBox(height: 3),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              product.colors?.join(', ') ?? '',
+                              style: const TextStyle(
+                                  fontSize: 11, color: Colors.grey),
+                            ),
+                            Text(
+                              product.name ?? '',
+                              style: const TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(height: 3),
+                            Text(
+                              "${product.price?.toStringAsFixed(2) ?? ''} EGP",
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
           );
-        } else if (state is ProductNewError) {
-          return Center(child: Text("Error: ${state.message}"));
+        } else if (state is ProductError) {
+          return Center(child: Text("خطأ: ${state.message}"));
         }
-        return Center(child: Text("No products available."));
+
+        return const Center(child: Text("لا توجد بيانات."));
       },
     );
   }

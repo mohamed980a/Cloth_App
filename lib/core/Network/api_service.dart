@@ -46,7 +46,7 @@ import '../../features/Auth/data/model/all_categories/all_categories.dart';
 import '../../features/Auth/data/model/forgotpassword.dart';
 import '../../features/Auth/data/model/signup.dart';
 
-part 'api_service.g.dart'; // This will be generated
+part 'api_service.g.dart';
 
 @RestApi(baseUrl: "https://api.tryon-store.xyz/api/v1/")
 abstract class LoginApi {
@@ -74,13 +74,12 @@ abstract class LoginApi {
       @Path("categoryId") String categoryId,
       @Query("keyword") String keyword,
       @Query("limit") int limit,
-      @Query("subcategories[in]") String subcategoryIds
-      );
+      @Query("subcategories[in]") String subcategoryIds);
   @GET('products/newProducts')
-  Future<List<Products>> getNewProducts({
-    @Query('limit') int limit = 10,
-    @Query('page') int page = 1,
-  });
+  Future<NewProduct> getNewProducts(
+    @Query('limit') int limit,
+    @Query('page') int page,
+  );
 }
 
 class LoginRequest {
