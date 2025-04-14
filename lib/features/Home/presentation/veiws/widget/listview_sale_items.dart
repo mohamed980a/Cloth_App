@@ -1,5 +1,8 @@
 import 'package:cloyhapp/core/Assets/assets_images.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../cubit/get_sales_products_cubit.dart';
 
 class ListViewSaleItems extends StatelessWidget {
   const ListViewSaleItems({super.key});
@@ -7,7 +10,26 @@ class ListViewSaleItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
+      body: BlocBuilder<ProductSalesCubit, ProductSalesState>(
+        builder: (context, state) {
+      if (state is ProductSalesLoading) {
+        return const Center(child: CircularProgressIndicator());
+      } else if (state is ProductSalesLoaded) {
+        final products = state.salesProduct.data?.products;
+
+        if (products == null || products.isEmpty) {
+          return const Center(child: Text("لا توجد منتجات حالياً"));
+        }
+
+        return SizedBox(
+            height: 300,
+            child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: products.length,
+            itemBuilder: (context, index) {
+          final product = products[index];
+
+          return Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -18,7 +40,7 @@ class ListViewSaleItems extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.red,
                 image: DecorationImage(
-                  image: AssetImage(AppAssets.testImage),
+                  image: NetworkImage(product.imgCover ?? ""),
                   fit: BoxFit.fill,
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -34,7 +56,7 @@ class ListViewSaleItems extends StatelessWidget {
                 Icon(Icons.star_border, color: Colors.grey, size: 20),
                 Icon(Icons.star_border, color: Colors.grey, size: 20),
                 Text(
-                  '(0)',
+                    "${product.ratingsAverage ?? 0}",
                   style: TextStyle(color: Colors.grey),
                 )
               ],
@@ -56,13 +78,13 @@ class ListViewSaleItems extends StatelessWidget {
                     style: TextStyle(fontSize: 11, color: Colors.grey),
                   ),
                   Text(
-                    'Blouse',
+                      product.name ?? '',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   /////////////////////////////////////////////////////
                   SizedBox(height: 3),
                   Text(
-                    '\$30',
+                    "${product.price?.toStringAsFixed(2) ?? ''} EGP",
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -74,7 +96,17 @@ class ListViewSaleItems extends StatelessWidget {
             ),
           ],
         ),
-      ),
+      );
+            },
+            ),
+        );
+      } else if (state is ProductSalesError) {
+        return Center(child: Text("خطأ: ${state.message}"));
+      }
+
+      return const Center(child: Text("لا توجد بيانات."));
+    },
+    ),
     );
   }
 }

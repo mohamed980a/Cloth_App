@@ -1,12 +1,15 @@
 import 'package:cloyhapp/core/Network/api_service.dart';
 import 'package:cloyhapp/features/Auth/data/model/all_categories/all_categories.dart';
 import 'package:cloyhapp/features/Auth/data/model/all_categories/products.dart';
+import 'package:cloyhapp/features/Auth/data/model/all_categories/saleproducts.dart';
 // import 'package:dio/dio.dart';
 // import 'package:retrofit/retrofit.dart';
 
 import '../../features/Auth/data/model/forgotpassword.dart';
 import '../../features/Auth/data/model/signup.dart';
 import 'package:cloyhapp/features/Auth/data/model/sub_categories.dart';
+
+import '../../features/Auth/data/model/wishlist.dart';
 
 class MyRepo {
   final LoginApi loginApi;
@@ -64,26 +67,26 @@ class AllCategoriesRepository {
 
 //////////////////// all_Products_on_category.dart
 
-class ProductRepository {
-  final LoginApi apiService;
-
-  ProductRepository(this.apiService);
-
-  Future<List<Products>> getProducts(String categoryId, String keyword,
-      int limit, String subcategoryIds) async {
-    try {
-      final products = await apiService.getProducts(
-        categoryId,
-        keyword,
-        limit,
-        subcategoryIds,
-      );
-      return products;
-    } catch (e) {
-      rethrow;
-    }
-  }
-}
+// class ProductRepository {
+//   final LoginApi apiService;
+//
+//   ProductRepository(this.apiService);
+//
+//   Future <Products> getProducts(String categoryId, String keyword,
+//       int limit, String subcategoryIds) async {
+//     try {
+//       final products = await apiService.getProducts(
+//         categoryId,
+//         keyword,
+//         limit,
+//         subcategoryIds,
+//       );
+//       return products;
+//     } catch (e) {
+//       rethrow;
+//     }
+//   }
+// }
 
 //////////////////// Get New Products
 
@@ -113,5 +116,83 @@ class ProductNewRepository {
     } catch (e) {
       rethrow;
     }
+  }
+}
+
+
+
+///////////////////////////////////////  on_sale_products.dart
+class ProductOnSaleRepository {
+  final LoginApi apiClient;
+
+  ProductOnSaleRepository({required this.apiClient});
+
+  Future<NewProduct> getOnSaleProducts(int limit, int page) async {
+    try {
+      return await apiClient.getOnSaleProducts(limit: limit, page: page);
+    } catch (e) {
+      rethrow;
+    }
+  }
+}
+
+///////////////////////////////////////  wishlist.dart
+class WishlistRepository {
+  final LoginApi apiClient;
+
+  WishlistRepository({required this.apiClient});
+
+  Future<WishlistResponse> getWishlist(String authorizationHeader) async {
+    try {
+      return await apiClient.getWishlist(authorizationHeader);
+    } catch (e) {
+      rethrow;
+    }
+  }
+}
+///////////////////////////////////////  wishlist.dart
+// class AddToWishlistRepository {
+//   final LoginApi apiClient;
+//
+//   AddToWishlistRepository({required this.apiClient});
+//
+//   Future<void> addToWishlist(Map<String, dynamic> body) async {
+//     try {
+//       await apiClient.addToWishlist(body);
+//     } catch (e) {
+//       rethrow;
+//     }
+//   }
+// }
+class AddWishlistRepository {
+  final LoginApi apiService;
+
+  AddWishlistRepository(this.apiService);
+
+  Future<void> addProductToWishlist(String productId) async {
+    final body = {"productId": productId};
+    await apiService.addToWishlist(body);
+  }
+}
+///////////////////////////////////////  getProductsCategory.dart
+class GetProductsCategoryRepository {
+  final LoginApi api;
+
+  GetProductsCategoryRepository(this.api);
+
+  Future<List<NewProduct>> fetchProducts({
+    required String categoryId,
+    required String token,
+    String? keyword,
+    required int limit,
+    required String subcategoryId,
+  }) {
+    return api.getProductsCategory(
+      categoryId,
+      'Bearer $token',
+      keyword,
+      limit,
+      subcategoryId,
+    );
   }
 }

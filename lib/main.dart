@@ -11,6 +11,9 @@ import 'package:cloyhapp/core/Network/api_service.dart';
 import 'package:cloyhapp/core/repo/repo.dart';
 
 import 'cubit/get_new_products_cubit.dart';
+import 'cubit/get_sales_products_cubit.dart';
+import 'cubit/getproductscategory_cubit.dart';
+import 'cubit/wishlist_cubit.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,7 +32,8 @@ class MyApp extends StatelessWidget {
     final subCategoriesRepo = SubCategoriesRepository(api: apiService);
     final allCategoriesRepo = AllCategoriesRepository(api: apiService);
     final newProductRepo = ProductCubit(apiService: apiService);
-
+    final salesProductRepo = ProductSalesCubit(apiService: apiService);
+    final getProductsCategoryRepository = GetProductsCategoryRepository( apiService);
     return MultiBlocProvider(
       providers: [
         BlocProvider<ForgotPasswordCubit>(
@@ -52,7 +56,17 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => ProductCubit(apiService: apiService)..fetchNewProducts( 10,  1),
 
-        )
+        ),
+        BlocProvider(
+          create: (_) => ProductSalesCubit(apiService: apiService)..fetchPSalesroducts( 10, 1),
+        ),
+        BlocProvider<WishlistCubit>(
+          create: (_) => WishlistCubit(repo as WishlistRepository),
+        ),
+        BlocProvider<GetproductscategoryCubit>(
+          create: (_) => GetproductscategoryCubit(getProductsCategoryRepository)..Getproductscategory(),
+        ),
+
       ],
       child: MaterialApp(
         theme: ThemeData.light(),

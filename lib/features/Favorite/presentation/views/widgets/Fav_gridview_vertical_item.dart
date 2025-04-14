@@ -1,11 +1,34 @@
 import 'package:cloyhapp/features/Favorite/presentation/views/widgets/Fav_gridview_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../cubit/wishlist_cubit.dart';
+import '../../../../../cubit/wishlist_state.dart';
 
 class FavGridviewVerticalItem extends StatelessWidget {
   const FavGridviewVerticalItem({super.key});
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return BlocBuilder<WishlistCubit, WishlistState>(
+        builder: (context, state) {
+      if (state is  WishlistLoading) {
+        return const Center(child: CircularProgressIndicator());
+      } else if (state is  WishlistLoaded) {
+        final products = state.wishlist.data?.wishlist;
+
+        if (products == null || products.isEmpty) {
+          return const Center(child: Text("لا توجد منتجات حالياً"));
+        }
+
+        return SizedBox(
+            height: 300,
+            child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: products.length,
+            itemBuilder: (context, index) {
+          final product = products[index];
+
+          return Container(
       width: 144,
       height: 285,
       decoration: BoxDecoration(
@@ -92,6 +115,17 @@ class FavGridviewVerticalItem extends StatelessWidget {
           ),
         ],
       ),
+    );
+            },
+            ),
+        );
+      } else if (state is  WishlistError) {
+        return Center(child: Text("خطأ: ${state.message}"));
+      }
+
+      return const Center(child: Text("لا توجد بيانات."));
+        },
+
     );
   }
 }

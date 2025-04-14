@@ -38,6 +38,7 @@
 // //   }
 
 import 'package:cloyhapp/features/Auth/data/model/all_categories/products.dart';
+import 'package:cloyhapp/features/Auth/data/model/all_categories/saleproducts.dart';
 import 'package:cloyhapp/features/Auth/data/model/sub_categories.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
@@ -45,11 +46,13 @@ import 'package:retrofit/retrofit.dart';
 import '../../features/Auth/data/model/all_categories/all_categories.dart';
 import '../../features/Auth/data/model/forgotpassword.dart';
 import '../../features/Auth/data/model/signup.dart';
+import '../../features/Auth/data/model/wishlist.dart';
 
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: "https://api.tryon-store.xyz/api/v1/")
 abstract class LoginApi {
+
   factory LoginApi(Dio dio, {String baseUrl}) = _LoginApi;
 
   @POST("users/signup")
@@ -69,17 +72,43 @@ abstract class LoginApi {
   @GET("subcategories")
   Future<SubCategoryResponse> getSubCategories();
 
-  @GET("categories/{categoryId}/products")
-  Future<List<Products>> getProducts(
-      @Path("categoryId") String categoryId,
-      @Query("keyword") String keyword,
-      @Query("limit") int limit,
-      @Query("subcategories[in]") String subcategoryIds);
+  // @GET("categories/{categoryId}/products")
+  // Future<Products> getProducts(
+  //     @Path("categoryId") String categoryId,
+  //     @Query("keyword") String keyword,
+  //     @Query("limit") int limit,
+  //     @Query("subcategories[in]") String subcategoryIds);
+
   @GET('products/newProducts')
+
   Future<NewProduct> getNewProducts(
     @Query('limit') int limit,
     @Query('page') int page,
   );
+
+  @GET("products/onSaleProducts")
+  Future<NewProduct> getOnSaleProducts({
+    @Query("limit") int limit = 10,
+    @Query("page") int page = 1,
+  });
+
+  @GET("wishlist")
+  Future<WishlistResponse> getWishlist(
+      @Header("Authorization") String authorizationHeader,
+      );
+
+  @POST('wishlist')
+  Future<void> addToWishlist(
+      @Body() Map<String, dynamic> body,
+      );
+  @GET("categories/{categoryId}/products")
+  Future<List<NewProduct>> getProductsCategory(
+      @Path("categoryId") String categoryId,
+      @Header("Authorization") String bearerToken,
+      @Query("keyword") String? keyword,
+      @Query("limit") int limit,
+      @Query("subcategories[in]") String subcategoryId,
+      );
 }
 
 class LoginRequest {
@@ -103,3 +132,8 @@ class LoginResponse {
     return LoginResponse(token: json['token']);
   }
 }
+
+
+
+
+

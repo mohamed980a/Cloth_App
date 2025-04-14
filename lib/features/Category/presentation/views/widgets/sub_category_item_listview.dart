@@ -22,39 +22,44 @@ class SubCategoryItemListview extends StatelessWidget {
             itemCount: categories.length,
             itemBuilder: (context, index) {
               final category = categories[index];
-              return Padding(
-                padding: const EdgeInsets.only(
-                  left: 19,
-                  right: 19,
-                  bottom: 16,
-                ),
-                child: Container(
-                    width: 343,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.white54,
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 23),
-                          child: Text(
-                            category.name ?? 'No Name',
-                            style: TextStyle(fontSize: 18, color: Colors.black),
+              return InkWell(
+                onTap: (){
+
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 19,
+                    right: 19,
+                    bottom: 16,
+                  ),
+                  child: Container(
+                      width: 343,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.white54,
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 23),
+                            child: Text(
+                              category.name ?? 'No Name',
+                              style: TextStyle(fontSize: 18, color: Colors.black),
+                            ),
                           ),
-                        ),
-                        Container(
-                          height: 100,
-                          width: 172,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(AppAssets.category), fit: BoxFit.fill)),
-                        )
-                      ],
-                    )),
+                          Container(
+                            height: 100,
+                            width: 172,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(AppAssets.category), fit: BoxFit.fill)),
+                          )
+                        ],
+                      )),
+                ),
               );
             },
           );

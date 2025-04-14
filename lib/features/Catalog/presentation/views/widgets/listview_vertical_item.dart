@@ -1,13 +1,23 @@
+import 'package:cloyhapp/core/repo/repo.dart';
 import 'package:cloyhapp/features/Catalog/presentation/views/widgets/listview_vertical_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../cubit/get_new_products_cubit.dart';
+import '../../../../../cubit/getproductscategory_cubit.dart';
 import '../../../../Prodect/presentation/views/prodect_screen.dart';
 
 class ListviewVerticalItem extends StatelessWidget {
   const ListviewVerticalItem({super.key});
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return BlocBuilder<GetproductscategoryCubit, GetproductscategoryState>(
+        builder: (context, state) {
+      if (state is GetproductscategoryLoading) return Center(child: CircularProgressIndicator());
+      if (state is GetproductscategoryLoaded) {
+        return ListView.builder(
+            itemCount: state.products.length ?? 0,
+            itemBuilder: (_, i) => Padding(
       padding: EdgeInsets.only(bottom: 17, right: 10),
       child: Container(
         width: 343,
@@ -93,6 +103,13 @@ class ListviewVerticalItem extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ),
+        );
+      } else if (state is GetproductscategoryError) {
+        return Center(child: Text(state.message));
+      } else {
+        return const SizedBox.shrink();
+      }
+    });
   }
 }
