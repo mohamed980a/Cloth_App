@@ -13,9 +13,11 @@ class CategoryBody extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(onPressed: () {
-              Navigator.pop(context);
-            }, icon: Icon(Icons.arrow_back_ios)),
+            IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(Icons.arrow_back_ios)),
             Text(
               "Categories",
               style: TextStyle(

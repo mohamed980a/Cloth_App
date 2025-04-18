@@ -77,7 +77,8 @@ class ListViewNewHorizontal extends StatelessWidget {
                                 product.name ?? '',
                                 style: const TextStyle(
                                     overflow: TextOverflow.ellipsis,
-                                    fontSize: 16, fontWeight: FontWeight.bold),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(height: 3),
                               Text(
@@ -107,7 +108,6 @@ class ListViewNewHorizontal extends StatelessWidget {
     );
   }
 }
-
 
 //
 // SizedBox(

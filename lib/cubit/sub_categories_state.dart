@@ -29,4 +29,3 @@ class SubCategoriesError extends SubCategoriesState {
   @override
   List<Object?> get props => [message];
 }
-

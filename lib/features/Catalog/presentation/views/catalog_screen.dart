@@ -6,6 +6,14 @@ class CatalogScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(body: CatalogBody()));
+    return const SafeArea(
+      child: Scaffold(
+        body: CatalogBody(
+          token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ey...",
+          categoryId: "1",
+          subcategoryId: "2",
+        ),
+      ),
+    );
   }
 }

@@ -9,8 +9,6 @@ class CategoryItemListview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     return BlocBuilder<AllCategoriesCubit, AllCategoriesState>(
       builder: (context, state) {
         if (state is AllCategoriesLoading) {
@@ -32,7 +30,6 @@ class CategoryItemListview extends StatelessWidget {
                       style: TextStyle(fontSize: 16, color: Colors.black),
                       textAlign: TextAlign.center,
                     ));
-
               },
             ),
           );
@@ -43,8 +40,5 @@ class CategoryItemListview extends StatelessWidget {
         }
       },
     );
-
-
-
   }
 }

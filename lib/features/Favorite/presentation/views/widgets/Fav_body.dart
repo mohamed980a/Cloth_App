@@ -5,6 +5,7 @@ import 'package:cloyhapp/features/Favorite/presentation/views/widgets/Fav_listvi
 import 'package:flutter/material.dart';
 
 import 'Fav_listview_horizontal.dart';
+import 'Fav_listview_vertical_container.dart';
 
 class FavBody extends StatefulWidget {
   const FavBody({super.key});
@@ -45,7 +46,7 @@ class _FavBodyState extends State<FavBody> {
                 },
               ),
               SizedBox(height: 25),
-              isGrid ? FavListviewVertical() : FavGridviewVertical()
+              isGrid ? FavListviewVerticalContainer() : FavGridviewVertical()
             ],
           ),
         ),

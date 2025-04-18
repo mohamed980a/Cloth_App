@@ -37,8 +37,9 @@
 // //   static const String ok = "Ok";
 // //   }
 
+import 'package:cloyhapp/features/Auth/data/model/add_to_cart.dart';
 import 'package:cloyhapp/features/Auth/data/model/all_categories/products.dart';
-import 'package:cloyhapp/features/Auth/data/model/all_categories/saleproducts.dart';
+
 import 'package:cloyhapp/features/Auth/data/model/sub_categories.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
@@ -47,12 +48,13 @@ import '../../features/Auth/data/model/all_categories/all_categories.dart';
 import '../../features/Auth/data/model/forgotpassword.dart';
 import '../../features/Auth/data/model/signup.dart';
 import '../../features/Auth/data/model/wishlist.dart';
+import '../../features/Catalog/logic/model_prod_cat.dart';
+import '../../features/Catalog/logic/subcatproduct.dart';
 
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: "https://api.tryon-store.xyz/api/v1/")
 abstract class LoginApi {
-
   factory LoginApi(Dio dio, {String baseUrl}) = _LoginApi;
 
   @POST("users/signup")
@@ -80,7 +82,6 @@ abstract class LoginApi {
   //     @Query("subcategories[in]") String subcategoryIds);
 
   @GET('products/newProducts')
-
   Future<NewProduct> getNewProducts(
     @Query('limit') int limit,
     @Query('page') int page,
@@ -94,21 +95,53 @@ abstract class LoginApi {
 
   @GET("wishlist")
   Future<WishlistResponse> getWishlist(
-      @Header("Authorization") String authorizationHeader,
-      );
+    @Header("Authorization") String authorizationHeader,
+  );
 
   @POST('wishlist')
   Future<void> addToWishlist(
-      @Body() Map<String, dynamic> body,
-      );
+    @Body() Map<String, dynamic> body,
+  );
+  // @GET("categories/{categoryId}/products")
+  // Future<List<NewProduct>> getProductsCategory(
+  //   @Path("categoryId") String categoryId,
+  //   @Header("Authorization") String bearerToken,
+  //   @Query("keyword") String? keyword,
+  //   @Query("limit") int limit,
+  //   @Query("subcategories[in]") String subcategoryId,
+  // );
+
+  //https://api.tryon-store.xyz/api/v1/categories/67f14eac0cfab7d1165898a6/products
   @GET("categories/{categoryId}/products")
-  Future<List<NewProduct>> getProductsCategory(
-      @Path("categoryId") String categoryId,
-      @Header("Authorization") String bearerToken,
-      @Query("keyword") String? keyword,
-      @Query("limit") int limit,
-      @Query("subcategories[in]") String subcategoryId,
-      );
+  Future<Products> getAllProductsOnCategory(
+    @Path("categoryId") String categoryId,
+    @Header("Authorization") String bearerToken,
+    @Query("keyword") String? keyword,
+    @Query("limit") int limit,
+    @Query("subcategories[in]") String subcategoryId,
+  );
+
+  @GET("categories")
+  Future<List<AllCategories>> getCategoryMohamed(
+      @Header("Authorization") String token);
+
+  @GET("categories/{categoryId}/products")
+  Future<ProductsResponse> getProductsByCategory(
+      @Path("categoryId") String categoryId);
+
+  @GET("subcategories/{id}/products")
+  Future<HttpResponse<Subcatproduct>> getProductsBySubCategory(
+      @Path("id") String subCategoryId);
+
+  @GET("/products/{id}")
+  Future<Product> getProductDetails(@Path("id") int id);
+
+  //https://api.tryon-store.xyz/api/v1/cart
+  @POST("cart")
+  Future<AddToCart> addToCart(
+    @Header("Authorization") String authorizationHeader,
+    @Body() Map<String, dynamic> body,
+  );
 }
 
 class LoginRequest {
@@ -132,8 +165,3 @@ class LoginResponse {
     return LoginResponse(token: json['token']);
   }
 }
-
-
-
-
-
