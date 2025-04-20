@@ -1,3 +1,4 @@
+
 import 'package:cloyhapp/cubit/all_categories_cubit.dart';
 import 'package:cloyhapp/cubit/all_categories_state.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +23,8 @@ class SubCategoryItemListview extends StatelessWidget {
             itemBuilder: (context, index) {
               final category = categories[index];
               return InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, 'Catalog');
+                onTap: (){
+
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(
@@ -46,8 +47,7 @@ class SubCategoryItemListview extends StatelessWidget {
                             padding: const EdgeInsets.only(left: 23),
                             child: Text(
                               category.name ?? 'No Name',
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.black),
+                              style: TextStyle(fontSize: 18, color: Colors.black),
                             ),
                           ),
                           Container(
@@ -55,8 +55,7 @@ class SubCategoryItemListview extends StatelessWidget {
                             width: 172,
                             decoration: BoxDecoration(
                                 image: DecorationImage(
-                                    image: AssetImage(AppAssets.category),
-                                    fit: BoxFit.fill)),
+                                    image: AssetImage(AppAssets.category), fit: BoxFit.fill)),
                           )
                         ],
                       )),

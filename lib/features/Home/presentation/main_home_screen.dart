@@ -1,4 +1,3 @@
-import 'package:cloyhapp/features/Catalog/presentation/views/catalog_screen.dart';
 import 'package:cloyhapp/features/Category/presentation/views/category_screen.dart';
 import 'package:cloyhapp/features/Favorite/presentation/views/Fav_screen.dart';
 import 'package:cloyhapp/features/Home/presentation/veiws/home_screen.dart';

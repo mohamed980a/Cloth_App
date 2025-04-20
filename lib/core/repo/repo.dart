@@ -1,18 +1,15 @@
 import 'package:cloyhapp/core/Network/api_service.dart';
-import 'package:cloyhapp/features/Auth/data/model/add_to_cart.dart';
 import 'package:cloyhapp/features/Auth/data/model/all_categories/all_categories.dart';
 import 'package:cloyhapp/features/Auth/data/model/all_categories/products.dart';
-
+import 'package:cloyhapp/features/Auth/data/model/all_categories/saleproducts.dart';
 // import 'package:dio/dio.dart';
 // import 'package:retrofit/retrofit.dart';
 
-import '../../features/Auth/data/model/all_product_on_category/all_product_on_category.dart';
 import '../../features/Auth/data/model/forgotpassword.dart';
 import '../../features/Auth/data/model/signup.dart';
 import 'package:cloyhapp/features/Auth/data/model/sub_categories.dart';
 
 import '../../features/Auth/data/model/wishlist.dart';
-import '../../features/Catalog/logic/model_prod_cat.dart';
 
 class MyRepo {
   final LoginApi loginApi;
@@ -122,6 +119,8 @@ class ProductNewRepository {
   }
 }
 
+
+
 ///////////////////////////////////////  on_sale_products.dart
 class ProductOnSaleRepository {
   final LoginApi apiClient;
@@ -151,7 +150,6 @@ class WishlistRepository {
     }
   }
 }
-
 ///////////////////////////////////////  wishlist.dart
 // class AddToWishlistRepository {
 //   final LoginApi apiClient;
@@ -176,84 +174,25 @@ class AddWishlistRepository {
     await apiService.addToWishlist(body);
   }
 }
-
 ///////////////////////////////////////  getProductsCategory.dart
-// class GetProductsCategoryRepository {
-//   final LoginApi api;
-//
-//   GetProductsCategoryRepository(this.api);
-//
-//   Future<ProductCategory> fetchProducts({
-//     required String categoryId,
-//     required String token,
-//     String? keyword,
-//     required int limit,
-//     required String subcategoryId,
-//   }) {
-//     return api.getAllProductsOnCategory(
-//       categoryId,
-//       'Bearer $token',
-//       keyword,
-//       limit,
-//       subcategoryId,
-//     );
-//   }
-// }
-
-//flutter pub run build_runner build --delete-conflicting-outputs
-//https://api.tryon-store.xyz/api/v1/products/newProducts
-
-class ProductSalesRepository {
-  final LoginApi apiClient;
-
-  ProductSalesRepository({required this.apiClient});
-
-  Future<NewProduct> getOnSaleProducts(int limit, int page) async {
-    try {
-      return await apiClient.getOnSaleProducts(limit: limit, page: page);
-    } catch (e) {
-      rethrow;
-    }
-  }
-}
-
-class AllProductOnCategoryRepository {
+class GetProductsCategoryRepository {
   final LoginApi api;
 
-  AllProductOnCategoryRepository(this.api);
+  GetProductsCategoryRepository(this.api);
 
-  Future<Products> fetchAllProducts({
+  Future<List<NewProduct>> fetchProducts({
     required String categoryId,
     required String token,
     String? keyword,
     required int limit,
     required String subcategoryId,
   }) {
-    return api.getAllProductsOnCategory(
+    return api.getProductsCategory(
       categoryId,
       'Bearer $token',
       keyword,
       limit,
       subcategoryId,
     );
-  }
-}
-
-// flutter pub run build_runner build --delete-conflicting-outputs
-
-//https://api.tryon-store.xyz/api/v1/cart
-//add to cart
-class AddToCartRepository {
-  final LoginApi apiClient;
-
-  AddToCartRepository({required this.apiClient});
-
-  Future<AddToCart> addToCart(String token, Map<String, dynamic> body) async {
-    try {
-      final response = await apiClient.addToCart(token, body);
-      return response;
-    } catch (e) {
-      rethrow;
-    }
   }
 }

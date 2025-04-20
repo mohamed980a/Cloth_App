@@ -1,8 +1,6 @@
 import 'package:cloyhapp/core/Assets/assets_images.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/Utils/constant.dart';
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -20,11 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   goToHomeScreen() {
     Future.delayed(Duration(seconds: 5), () {
-      token != null && token != ""
-          ? Navigator.pushReplacementNamed(context, "HomeScreen")
-          : Navigator.pushReplacementNamed(context, "RegisterScreen");
-
-      // Navigator.pushReplacementNamed(context, "RegisterScreen");
+      Navigator.pushReplacementNamed(context, "RegisterScreen");
     });
   }
 

@@ -9,6 +9,7 @@ class SubCategoriesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // انا احمد الحمار ههههههههههه
     context.read<SubCategoriesCubit>().getSubCategories();
 
     return BlocBuilder<SubCategoriesCubit, SubCategoriesState>(

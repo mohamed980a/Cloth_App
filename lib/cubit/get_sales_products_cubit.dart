@@ -30,6 +30,7 @@ class ProductSalesError extends ProductSalesState {
   List<Object> get props => [message];
 }
 
+
 class ProductSalesCubit extends Cubit<ProductSalesState> {
   final LoginApi apiService;
 
@@ -38,8 +39,7 @@ class ProductSalesCubit extends Cubit<ProductSalesState> {
   Future<void> fetchPSalesroducts(int limit, int page) async {
     emit(ProductSalesLoading());
     try {
-      final products =
-          await apiService.getOnSaleProducts(limit: limit, page: page);
+      final products = await apiService.getOnSaleProducts(limit: limit, page: page);
       emit(ProductSalesLoaded(products as NewProduct));
     } catch (e) {
       emit(ProductSalesError(e.toString()));

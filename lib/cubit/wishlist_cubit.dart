@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:cloyhapp/core/Utils/constant.dart';
 import 'package:cloyhapp/core/repo/repo.dart';
 import 'wishlist_state.dart';
 
@@ -12,7 +11,7 @@ class WishlistCubit extends Cubit<WishlistState> {
     emit(WishlistLoading());
     try {
       final wishlist = await wishlistRepository.getWishlist(
-        'Bearer $token',
+        'Bearer ${await wishlistRepository.apiClient}',
       );
 
       if (wishlist.data.wishlist.isEmpty) {
