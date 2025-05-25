@@ -1,78 +1,41 @@
-import 'package:cloyhapp/cubit/all_categories_cubit.dart';
-import 'package:cloyhapp/cubit/cubit_cubit.dart';
-import 'package:cloyhapp/cubit/forgotpassword_cubit.dart';
-import 'package:cloyhapp/cubit/sub_categories_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dio/dio.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:learn_chinese/core/di/dependency_injection.dart';
+import 'package:learn_chinese/core/helpers/extensions.dart';
+import 'package:learn_chinese/core/helpers/shared_pref_helper.dart';
+import 'package:learn_chinese/core/routing/app_router.dart';
+import 'package:learn_chinese/learn_app.dart';
+import 'core/helpers/constants.dart';
 
-import 'package:cloyhapp/core/app_router.dart';
-import 'package:cloyhapp/core/Network/api_service.dart';
-import 'package:cloyhapp/core/repo/repo.dart';
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  setupGetIt();
+  await ScreenUtil.ensureScreenSize();
+  await checkIfLoggedInUser();
 
-import 'cubit/get_new_products_cubit.dart';
-import 'cubit/get_sales_products_cubit.dart';
-import 'cubit/getproductscategory_cubit.dart';
-import 'cubit/wishlist_cubit.dart';
-
-void main() {
-  runApp(MyApp());
+  runApp(
+    LearningApp(appRouter: AppRouter()),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({super.key});
-  final AppRouter appRouter = AppRouter();
-
-  @override
-  Widget build(BuildContext context) {
-    final dio = Dio();
-    final apiService = LoginApi(dio);
-    final repo = MyRepo(apiService);
-    final repos = ForgotPasswordRepository(apiClient: apiService);
-    final subCategoriesRepo = SubCategoriesRepository(api: apiService);
-    final allCategoriesRepo = AllCategoriesRepository(api: apiService);
-    final newProductRepo = ProductCubit(apiService: apiService);
-    final salesProductRepo = ProductSalesCubit(apiService: apiService);
-    final getProductsCategoryRepository = GetProductsCategoryRepository( apiService);
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<ForgotPasswordCubit>(
-          create: (_) => ForgotPasswordCubit(repository: repos),
-        ),
-        BlocProvider<SignupCubit>(
-          create: (_) => SignupCubit(repo),
-        ),
-        BlocProvider<SubCategoriesCubit>(
-          create: (_) =>
-              SubCategoriesCubit(subCategoriesRepo)..getSubCategories(),
-        ),
-        BlocProvider<AllCategoriesCubit>(
-          create: (_) =>
-              AllCategoriesCubit(allCategoriesRepo)..getAllCategories(),
-        ),
-        BlocProvider<ProductCubit>(
-          create: (_) => newProductRepo,
-        ),
-        BlocProvider(
-          create: (_) => ProductCubit(apiService: apiService)..fetchNewProducts( 10,  1),
-
-        ),
-        BlocProvider(
-          create: (_) => ProductSalesCubit(apiService: apiService)..fetchPSalesroducts( 10, 1),
-        ),
-        BlocProvider<WishlistCubit>(
-          create: (_) => WishlistCubit(repo as WishlistRepository),
-        ),
-        BlocProvider<GetproductscategoryCubit>(
-          create: (_) => GetproductscategoryCubit(getProductsCategoryRepository)..Getproductscategory(),
-        ),
-
-      ],
-      child: MaterialApp(
-        theme: ThemeData.light(),
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: appRouter.generateRoute,
-      ),
-    );
-  }
+Future<void> checkIfLoggedInUser() async {
+  final String? userToken =
+      await SharedPrefHelper.getString(SharedPrefKeys.userToken);
+  isLoggedInUser = !userToken.isNullOrEmpty();
 }
+
+// void main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   setupGetIt();
+//   runApp(
+//     ScreenUtilInit(
+//       designSize: Size(375, 812),
+//       builder: (context, child) {
+//         return MaterialApp(
+//           debugShowCheckedModeBanner: false,
+//           home: MyCourseDetails(),
+//         );
+//       },
+//     ),
+//   );
+// }
